@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인지 오류 추리실 — CASE FILE</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="stage-wrap">
+      <header>
+        <div class="eyebrow" id="stageEyebrow">STAGE 1</div>
+        <h1 id="stageTitle">기억과 지각의 방</h1>
+        <p class="sub" id="stageSub">
+          여섯 개의 문 뒤에는 각기 다른 인지 오류 사례가 숨어 있습니다. 문을
+          열어 오류의 이름을 추리하세요.
+        </p>
+        <div class="progress">
+          해결 <b id="solvedCount">0</b> / 6
+          <span class="dots" id="progressDots"></span>
+        </div>
+      </header>
+
+      <div class="room" id="room" data-case="07"></div>
+
+      <div class="go-next-wrap" id="goNextWrap" style="display: none">
+        <button class="btn solid" id="goNextBtn">다음 페이지로 넘어가기</button>
+      </div>
+
+      <!-- 문제 추가하고 문구 변경! -->
+      <footer>
+        인지 오류 추리실 · 문제는 이후 업데이트에서 추가될 예정입니다
+      </footer>
+    </div>
+
+    <div class="overlay" id="questionOverlay">
+      <div class="door-hinge-wrap">
+        <div class="modal-panel" id="modalPanel">
+          <div class="modal-top">
+            <div class="modal-case">
+              <span class="mini-lamp" id="modalLamp"></span>
+              <span id="modalCaseLabel">CASE 01</span>
+            </div>
+            <button class="close-btn" id="closeModalBtn" aria-label="닫기">
+              ✕
+            </button>
+          </div>
+          <h2 class="bias-name" id="modalBiasPlaceholder">???</h2>
+          <p class="scenario" id="modalScenario">
+            시나리오 내용이 여기에 표시됩니다.
+          </p>
+          <ul class="options" id="modalOptions"></ul>
+          <div class="feedback" id="modalFeedback"></div>
+          <div class="modal-actions">
+            <button class="btn ghost" id="closeModalBtn2">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="confirmOverlay">
+      <div class="confirm-panel">
+        <div class="confirm-icon">✓</div>
+        <h3 class="confirm-title">모든 문을 해결했습니다</h3>
+        <p class="confirm-sub">
+          이 방의 사건은 모두 해결되었습니다.<br />다음 단계로 넘어가시겠습니까?
+        </p>
+        <div class="confirm-actions">
+          <button class="btn ghost" id="stayBtn">아니오</button>
+          <button class="btn solid" id="nextStageBtn">예</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-wrap psych-screen" id="psychScreen" style="display: none">
+      <div class="psych-center">
+        <div class="eyebrow">STAGE 2</div>
+        <h1 class="psych-title">심리테스트</h1>
+        <p class="sub">
+          준비 중인 단계입니다. 이후 업데이트에서 실제 심리테스트 콘텐츠가
+          이곳에 추가됩니다.
+        </p>
+        <button class="btn ghost" id="backToRoomBtn">처음으로 돌아가기</button>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
