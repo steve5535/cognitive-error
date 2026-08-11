@@ -73,14 +73,38 @@
     </div>
 
     <div class="stage-wrap psych-screen" id="psychScreen" style="display: none">
-      <div class="psych-center">
-        <div class="eyebrow">STAGE 2</div>
-        <h1 class="psych-title">심리테스트</h1>
-        <p class="sub">
-          준비 중인 단계입니다. 이후 업데이트에서 실제 심리테스트 콘텐츠가
-          이곳에 추가됩니다.
-        </p>
-        <button class="btn ghost" id="backToRoomBtn">처음으로 돌아가기</button>
+      <div class="psych-card" id="psychCard">
+        <div class="psych-view" id="psychIntro">
+          <div class="eyebrow">STAGE 2</div>
+          <h1>심리테스트</h1>
+          <p class="sub">
+            열두 가지 질문에 답하면 당신의 감성 유형을 알려드립니다.
+          </p>
+          <div class="confirm-actions">
+            <button class="btn ghost back-to-room-btn">
+              처음으로 돌아가기
+            </button>
+            <button class="btn solid" id="startPsychBtn">시작하기</button>
+          </div>
+        </div>
+
+        <div class="psych-view" id="psychQuiz" style="display: none">
+          <div class="psych-progress"><b id="psychQNum">1</b> / 12</div>
+          <p class="psych-question" id="psychQuestionText"></p>
+          <ul class="options" id="psychOptions"></ul>
+        </div>
+
+        <div class="psych-view" id="psychResultView" style="display: none">
+          <div class="eyebrow">RESULT</div>
+          <h2 class="psych-result-title" id="psychResultTitle"></h2>
+          <p class="sub" id="psychResultDesc"></p>
+          <div class="confirm-actions">
+            <button class="btn ghost" id="retakePsychBtn">다시하기</button>
+            <button class="btn solid back-to-room-btn">
+              처음으로 돌아가기
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
