@@ -693,25 +693,82 @@ h1 {
 }
 
 .psych-card {
-  width: min(460px, 92vw);
-  max-height: 86vh;
+  position: relative;
+  width: min(440px, 90vw);
+  max-height: 82vh;
   overflow-y: auto;
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(201, 162, 39, 0.12),
-      transparent 60%
-    ),
-    var(--panel);
-  border: 1px solid var(--panel-line);
-  border-radius: 16px;
+  background: linear-gradient(180deg, #faf4e6, #f0e6d0);
+  border-radius: 6px 6px 12px 12px;
   box-shadow:
-    var(--shadow-deep),
-    0 0 0 1px rgba(201, 162, 39, 0.08);
+    0 20px 40px rgba(30, 18, 8, 0.35),
+    0 2px 0 rgba(255, 255, 255, 0.4) inset;
   padding: 34px 28px 28px;
   text-align: center;
   animation: fadeUp 0.4s ease;
 }
+.psych-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  border-radius: 6px 6px 0 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 6px,
+    rgba(90, 58, 30, 0.12) 6px 7px
+  );
+}
+
+.psych-card h1,
+.psych-card .psych-question,
+.psych-card .psych-result-title {
+  color: #3c2411;
+}
+.psych-card .eyebrow {
+  color: #8a5a2e;
+}
+.psych-card .sub {
+  color: #5c4632;
+}
+.psych-card .psych-progress {
+  color: #7a5c3e;
+}
+.psych-card .psych-progress b {
+  color: #6b3f1d;
+}
+
+.psych-card .options .option-btn {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(90, 58, 30, 0.28);
+  color: #3c2411;
+}
+.psych-card .options .option-btn:hover:not(:disabled) {
+  border-color: #8a5a2e;
+  background: rgba(255, 255, 255, 0.8);
+}
+.psych-card .options .option-btn .idx {
+  border-color: rgba(90, 58, 30, 0.4);
+  color: #6b4a26;
+}
+
+.psych-card .btn.ghost {
+  border-color: #8a5a2e;
+  color: #4a2c17;
+}
+.psych-card .btn.ghost:hover {
+  background: rgba(90, 58, 38, 0.12);
+  color: #2c1a0e;
+}
+.psych-card .btn.solid {
+  background: #8a5a2e;
+  color: #fdf6e8;
+}
+.psych-card .btn.solid:hover {
+  background: #6b4420;
+}
+
 .psych-view .sub {
   margin-left: auto;
   margin-right: auto;
