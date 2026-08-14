@@ -832,3 +832,49 @@ footer {
     transition-duration: 0.001s !important;
   }
 }
+
+/* 심리 테스트 결과 화면 */
+
+.result-heading {
+  font-family: var(--serif);
+  font-size: clamp(25px, 5vw, 34px);
+  font-weight: 800;
+  color: #2f1d0d;
+  margin-bottom: 18px;
+}
+
+.psych-result-image {
+  display: block;
+  width: min(330px, 82vw);
+  max-height: 330px;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  border-radius: 10px;
+}
+
+.result-divider {
+  width: 64px;
+  height: 2px;
+  margin: 0 auto 18px;
+  background: #8a5a2e;
+  opacity: 0.45;
+}
+
+.psych-result-desc {
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 24px !important;
+}
+
+.psych-result-title {
+  font-size: clamp(25px, 5vw, 34px);
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+@media (max-width: 480px) {
+  .psych-result-image {
+    width: min(280px, 78vw);
+    max-height: 280px;
+  }
+}

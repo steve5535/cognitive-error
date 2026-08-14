@@ -285,34 +285,48 @@
     ];
 
     // 결과 7종 (더미 설명 — 추후 실제 문구로 교체 예정)
+    // 심리 테스트 결과 7종
     const RESULT_TYPES = {
         "임의적 추론": {
-            title: "임의적 추론형",
-            desc: "충분한 근거 없이 성급하게 결론으로 건너뛰는 경향이 있습니다. 명확한 증거가 없어도 최악의 가능성을 사실처럼 받아들이곤 해요."
+            title: "근거 없는 시나리오 소설가",
+            desc: "충분한 근거 없이 다른 사람의 생각이나 상황을 추측해 결론을 내리는 경향이 있습니다. 확인되지 않은 이야기가 사실처럼 느껴질 수 있어요.",
+            image: "img/arbitrary.png"
         },
+
         "선택적 추상화": {
-            title: "선택적 추상화형",
-            desc: "전체 상황 중 부정적인 한 부분에만 집중해 전체를 판단하는 경향이 있습니다. 좋았던 부분은 쉽게 잊혀지곤 해요."
+            title: "오점 수집가형",
+            desc: "전체 상황 중 부정적인 한 부분에만 집중해 전체를 판단하는 경향이 있습니다. 좋았던 부분은 쉽게 지나칠 수 있어요.",
+            image: "img/selective-abstraction.png"
         },
+
         "과잉 일반화": {
-            title: "과잉 일반화형",
-            desc: "한두 번의 경험을 근거로 모든 상황에 똑같은 결론을 적용하는 경향이 있습니다. '항상', '역시'라는 말이 자주 떠오르곤 해요."
+            title: "성급한 결론 주의자",
+            desc: "한두 번의 경험을 근거로 비슷한 일이 계속될 것이라고 일반화하는 경향이 있습니다. 한 번의 경험과 전체를 구분해 보는 것이 도움이 됩니다.",
+            image: "img/overgeneralization.png"
         },
+
         "파국화": {
-            title: "파국화형",
-            desc: "작은 문제를 실제보다 훨씬 크고 심각한 일로 확대해서 받아들이는 경향이 있습니다. 최악의 시나리오부터 떠오르곤 해요."
+            title: "최악 시나리오 연출가",
+            desc: "작은 문제를 실제보다 훨씬 크고 심각한 일로 확대해서 받아들이는 경향이 있습니다. 아직 일어나지 않은 최악의 상황을 먼저 상상할 수 있어요.",
+            image: "img/catastrophe.png"
         },
+
         "개인화": {
-            title: "개인화형",
-            desc: "자신과 직접 관련 없는 일까지 스스로의 탓으로 돌리는 경향이 있습니다. 문제의 원인을 나에게서부터 찾곤 해요."
+            title: "모든 비극의 주인공",
+            desc: "자신과 직접 관련 없는 일까지 스스로의 탓으로 돌리는 경향이 있습니다. 여러 원인이 함께 작용할 수 있다는 점을 생각해 보는 것이 좋아요.",
+            image: "img/personalization.png"
         },
+
         "흑백논리": {
-            title: "흑백논리형",
-            desc: "중간 없이 모든 것을 극단적인 두 가지로만 나눠서 보는 경향이 있습니다. '완벽하거나 실패하거나' 둘 중 하나로 느껴지곤 해요."
+            title: "모 아니면 도, 극단주의자",
+            desc: "중간의 가능성을 놓치고 모든 것을 두 가지 극단으로 나누어 보는 경향이 있습니다. '완벽 또는 실패' 사이에도 다양한 선택지가 있을 수 있어요.",
+            image: "img/blackwhite.png"
         },
+
         "건강한 사고": {
-            title: "건강한 사고형",
-            desc: "상황을 있는 그대로 균형 있게 받아들이는 편입니다. 과도한 걱정이나 왜곡 없이 유연하게 생각하는 힘을 갖고 있어요."
+            title: "균형 잡힌 중재자",
+            desc: "상황을 한쪽으로 단정하기보다 여러 가능성과 근거를 함께 살펴보는 편입니다. 감정과 사실을 균형 있게 바라보려는 힘이 있어요.",
+            image: "img/healthy-thinking.png"
         }
     };
 
@@ -343,6 +357,7 @@
     const psychOptionsEl = document.getElementById('psychOptions');
     const psychResultTitleEl = document.getElementById('psychResultTitle');
     const psychResultDescEl = document.getElementById('psychResultDesc');
+    const psychResultImageEl = document.getElementById('psychResultImage');
 
     function resetPsychViews() {
         psychIntroEl.style.display = '';
@@ -393,10 +408,14 @@
 
     function showPsychResult() {
         const tally = {};
-        psychAnswers.forEach((t) => { tally[t] = (tally[t] || 0) + 1; });
+
+        psychAnswers.forEach((t) => {
+            tally[t] = (tally[t] || 0) + 1;
+        });
 
         let bestType = psychAnswers[0];
         let bestCount = 0;
+
         Object.keys(tally).forEach((t) => {
             if (tally[t] > bestCount) {
                 bestCount = tally[t];
@@ -404,9 +423,23 @@
             }
         });
 
-        const result = RESULT_TYPES[bestType];
+        const result =
+            RESULT_TYPES[bestType] ||
+            RESULT_TYPES["건강한 사고"];
+
         psychResultTitleEl.textContent = result.title;
         psychResultDescEl.textContent = result.desc;
+
+        // 결과별 이미지가 등록되어 있으면 표시
+        if (result.image) {
+            psychResultImageEl.src = result.image;
+            psychResultImageEl.alt = `${result.title} 결과 이미지`;
+            psychResultImageEl.style.display = 'block';
+        } else {
+            // 이미지가 없으면 이미지 영역 숨기기
+            psychResultImageEl.removeAttribute('src');
+            psychResultImageEl.style.display = 'none';
+        }
 
         sendResultToSheet(bestType);
 
