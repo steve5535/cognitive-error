@@ -95,6 +95,7 @@
         </div>
 
         <div class="psych-view" id="psychResultView" style="display: none">
+          <!-- 결과 상단 -->
           <div class="result-heading">내 안의 베르테르는?</div>
 
           <img
@@ -104,14 +105,29 @@
             alt="심리 테스트 결과 이미지"
           />
 
-          <div class="result-divider"></div>
-
           <div class="eyebrow">YOUR WERTHER</div>
 
           <h2 class="psych-result-title" id="psychResultTitle"></h2>
 
-          <p class="sub psych-result-desc" id="psychResultDesc"></p>
+          <!-- ① 내가 자주 사용하는 인지적 오류는? -->
+          <div class="result-section">
+            <h3>내가 자주 사용하는 인지적 오류는?</h3>
+            <p id="psychCognitiveError"></p>
+          </div>
 
+          <!-- ② 소설 속 베르테르는? -->
+          <div class="result-section">
+            <h3>소설 속 베르테르는?</h3>
+            <p id="psychWerther"></p>
+          </div>
+
+          <!-- ③ 사고 교정 Tip -->
+          <div class="result-section">
+            <h3>인지적 오류에서 벗어나는 사고 교정 Tip!</h3>
+            <p id="psychTip"></p>
+          </div>
+
+          <!-- 버튼 -->
           <div class="confirm-actions">
             <button class="btn ghost" id="retakePsychBtn">다시하기</button>
 

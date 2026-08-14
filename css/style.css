@@ -878,3 +878,86 @@ footer {
     max-height: 280px;
   }
 }
+
+/* 결과 화면 */
+
+.result-heading {
+  font-family: var(--serif);
+  font-size: clamp(25px, 5vw, 34px);
+  font-weight: 800;
+  color: #2f1d0d;
+  margin-bottom: 20px;
+}
+
+.psych-result-image {
+  display: block;
+  width: min(330px, 82vw);
+  max-height: 330px;
+  object-fit: contain;
+  margin: 0 auto 22px;
+  border-radius: 10px;
+}
+
+.psych-result-title {
+  font-size: clamp(25px, 5vw, 34px);
+  line-height: 1.35;
+  word-break: keep-all;
+  margin-bottom: 30px;
+}
+
+/* 결과 설명 각각의 영역 */
+
+.result-section {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 28px;
+  padding: 22px 24px;
+
+  border-top: 1px solid rgba(80, 50, 25, 0.2);
+  text-align: left;
+}
+
+.result-section h3 {
+  margin: 0 0 10px;
+
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 800;
+
+  color: #3a2414;
+}
+
+.result-section p {
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: #5d5147;
+  word-break: keep-all;
+}
+
+/* 마지막 섹션 */
+
+.result-section:last-of-type {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 480px) {
+  .psych-result-image {
+    width: min(280px, 78vw);
+    max-height: 280px;
+  }
+
+  .result-section {
+    padding: 18px;
+  }
+
+  .result-section h3 {
+    font-size: 18px;
+  }
+
+  .result-section p {
+    font-size: 14px;
+  }
+}
