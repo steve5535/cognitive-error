@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>인지 오류 추리실</title>
+    <title>인지적 오류 추리실</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
         <div class="eyebrow" id="stageEyebrow">STAGE 1</div>
         <h1 id="stageTitle">기억과 지각의 방</h1>
         <p class="sub" id="stageSub">
-          여섯 개의 문 뒤에는 각기 다른 인지 오류 사례가 숨어 있습니다. 문을
+          여섯 개의 문 뒤에는 각기 다른 인지적 오류 사례가 숨어 있습니다. 문을
           열어 오류의 이름을 추리하세요.
         </p>
         <div class="progress">
@@ -27,10 +27,7 @@
         <button class="btn solid" id="goNextBtn">다음 페이지로 넘어가기</button>
       </div>
 
-      <!-- 문제 추가하고 문구 변경! -->
-      <footer>
-        인지 오류 추리실 · 문제는 이후 업데이트에서 추가될 예정입니다
-      </footer>
+      <footer>인지적 오류 추리실</footer>
     </div>
 
     <div class="overlay" id="questionOverlay">
@@ -78,7 +75,8 @@
           <div class="eyebrow">STAGE 2</div>
           <h1>심리테스트</h1>
           <p class="sub">
-            열두 가지 질문에 답하면 당신의 감성 유형을 알려드립니다.
+            열두 가지 질문에 답하면 당신 안에 있는 베르테르를 만나볼 수
+            있습니다.
           </p>
           <div class="confirm-actions">
             <button class="btn ghost back-to-room-btn">
@@ -95,7 +93,6 @@
         </div>
 
         <div class="psych-view" id="psychResultView" style="display: none">
-          <!-- 결과 상단 -->
           <div class="result-heading">내 안의 베르테르는?</div>
 
           <img
@@ -109,25 +106,21 @@
 
           <h2 class="psych-result-title" id="psychResultTitle"></h2>
 
-          <!-- ① 내가 자주 사용하는 인지적 오류는? -->
           <div class="result-section">
             <h3>내가 자주 사용하는 인지적 오류는?</h3>
             <p id="psychCognitiveError"></p>
           </div>
 
-          <!-- ② 소설 속 베르테르는? -->
           <div class="result-section">
             <h3>소설 속 베르테르는?</h3>
             <p id="psychWerther"></p>
           </div>
 
-          <!-- ③ 사고 교정 Tip -->
           <div class="result-section">
             <h3>인지적 오류에서 벗어나는 사고 교정 Tip!</h3>
             <p id="psychTip"></p>
           </div>
 
-          <!-- 버튼 -->
           <div class="confirm-actions">
             <button class="btn ghost" id="retakePsychBtn">다시하기</button>
 
