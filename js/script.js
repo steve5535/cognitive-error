@@ -1,153 +1,5 @@
 (function () {
 
-    // 더미 데이터 — 추후 실제 문제로 교체 예정
-    const STAGES = [
-        {
-            eyebrow: "STAGE 1",
-            title: "기억과 지각의 방",
-            sub: "여섯 개의 문 뒤에는 각기 다른 인지 오류 사례가 숨어 있습니다. 문을 열어 오류의 이름을 추리하세요.",
-            caseNo: "07",
-            doors: [
-                {
-                    tag: "CASE 01",
-                    bias: "확증 편향",
-                    scenario: "수사관 A는 용의자가 범인이라 확신한 뒤, 그 믿음과 들어맞는 증언만 수첩에 적고 반대되는 목격담은 '신빙성이 낮다'며 넘겨버렸다.",
-                    options: ["o", "가용성 휴리스틱", "손실 회피", "앵커링 효과"],
-                    correct: 0,
-                    explanation: "자신의 기존 믿음과 일치하는 정보만 받아들이고, 반대되는 정보는 무시하거나 낮게 평가하는 경향입니다."
-                },
-                {
-                    tag: "CASE 02",
-                    bias: "가용성 휴리스틱",
-                    scenario: "최근 뉴스에서 비행기 사고 소식을 접한 시민은 실제 통계와 달리 '비행기가 자동차보다 훨씬 위험하다'고 단정했다.",
-                    options: ["도박사의 오류", "o", "헤일로 효과", "매몰비용 오류"],
-                    correct: 1,
-                    explanation: "머릿속에 쉽게 떠오르는 사례(강렬하거나 최근의 정보)를 근거로 확률이나 빈도를 과대평가하는 오류입니다."
-                },
-                {
-                    tag: "CASE 03",
-                    bias: "사후 확신 편향",
-                    scenario: "사건이 종결된 후 형사는 '처음부터 그가 범인이라는 걸 알고 있었다'고 말했지만, 수사 초기 기록에는 전혀 다른 용의자를 지목했었다.",
-                    options: ["집단사고", "o", "확증 편향", "더닝-크루거 효과"],
-                    correct: 1,
-                    explanation: "결과를 알고 난 뒤 마치 처음부터 그 결과를 예측했던 것처럼 기억을 재구성하는 경향입니다."
-                },
-                {
-                    tag: "CASE 04",
-                    bias: "헤일로 효과",
-                    scenario: "배심원들은 피고인이 단정한 옷차림에 말투가 부드럽다는 이유만으로 '이런 사람이 범죄를 저질렀을 리 없다'고 느꼈다.",
-                    options: ["o", "손실 회피", "앵커링 효과", "가용성 휴리스틱"],
-                    correct: 0,
-                    explanation: "한 가지 긍정적 특성(외모, 태도 등)이 그 사람의 다른 자질 평가에까지 긍정적으로 번지는 현상입니다."
-                },
-                {
-                    tag: "CASE 05",
-                    bias: "착각적 상관",
-                    scenario: "탐정은 사건이 발생한 날마다 우연히 검은 우산을 든 사람을 목격했다는 이유로, 검은 우산과 범죄 사이에 어떤 관계가 있다고 믿기 시작했다.",
-                    options: ["o", "확증 편향", "매몰비용 오류", "집단사고"],
-                    correct: 0,
-                    explanation: "실제로는 관련이 없는 두 사건 사이에서 그럴듯한 인과관계나 상관관계를 지어내는 오류입니다."
-                },
-                {
-                    tag: "CASE 06",
-                    bias: "자기중심적 편향",
-                    scenario: "공동 수사를 마친 두 형사는 각자 '내가 사건 해결에 가장 결정적인 역할을 했다'고 회상하며 서로 다른 이야기를 했다.",
-                    options: ["o", "도박사의 오류", "앵커링 효과", "헤일로 효과"],
-                    correct: 0,
-                    explanation: "공동의 결과에 대해 자신의 기여도를 실제보다 크게 평가하고 기억하는 경향입니다."
-                }
-            ]
-        }
-    ];
-
-    // 결과 7종 (더미 설명 — 추후 실제 문구로 교체 예정)
-    // 심리 테스트 결과 7종
-    const RESULT_TYPES = {
-        "임의적 추론": {
-            title: "근거 없는 시나리오 소설가",
-            desc: "충분한 근거 없이 다른 사람의 생각이나 상황을 추측해 결론을 내리는 경향이 있습니다. 확인되지 않은 이야기가 사실처럼 느껴질 수 있어요.",
-            image: "img/arbitrary.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "선택적 추상화": {
-            title: "오점 수집가형",
-            desc: "전체 상황 중 부정적인 한 부분에만 집중해 전체를 판단하는 경향이 있습니다. 좋았던 부분은 쉽게 지나칠 수 있어요.",
-            image: "img/selective-abstraction.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "과잉 일반화": {
-            title: "성급한 결론 주의자",
-            desc: "한두 번의 경험을 근거로 비슷한 일이 계속될 것이라고 일반화하는 경향이 있습니다. 한 번의 경험과 전체를 구분해 보는 것이 도움이 됩니다.",
-            image: "img/overgeneralization.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "파국화": {
-            title: "최악 시나리오 연출가",
-            desc: "작은 문제를 실제보다 훨씬 크고 심각한 일로 확대해서 받아들이는 경향이 있습니다. 아직 일어나지 않은 최악의 상황을 먼저 상상할 수 있어요.",
-            image: "img/catastrophe.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "개인화": {
-            title: "모든 비극의 주인공",
-            desc: "자신과 직접 관련 없는 일까지 스스로의 탓으로 돌리는 경향이 있습니다. 여러 원인이 함께 작용할 수 있다는 점을 생각해 보는 것이 좋아요.",
-            image: "img/personalization.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "흑백논리": {
-            title: "모 아니면 도, 극단주의자",
-            desc: "중간의 가능성을 놓치고 모든 것을 두 가지 극단으로 나누어 보는 경향이 있습니다. '완벽 또는 실패' 사이에도 다양한 선택지가 있을 수 있어요.",
-            image: "img/blackwhite.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        },
-
-        "건강한 사고": {
-            title: "균형 잡힌 중재자",
-            desc: "상황을 한쪽으로 단정하기보다 여러 가능성과 근거를 함께 살펴보는 편입니다. 감정과 사실을 균형 있게 바라보려는 힘이 있어요.",
-            image: "img/healthy-thinking.png",
-
-            cognitiveError: "1234",
-
-            werther: "1234",
-
-            tip: "1234"
-        }
-    };
-
     let stageIndex = 0;
     let status = [];
     let activeDoorIndex = null;
@@ -362,16 +214,6 @@
     document.getElementById('nextStageBtn').addEventListener('click', goToNextPage);
     document.getElementById('goNextBtn').addEventListener('click', goToNextPage);
 
-    const PSYCH_QUESTIONS = [
-        {
-            q: "친구들과 대화하는 단체 대화방에서 대화가 끊겼을 때 나는?",
-            options: [
-                { text: "다들 내 메시지를 보고 속으로 ‘얘 또 말도 안 되는 소리 하네’라며 일부러 무시하는 게 틀림없어.", type: "임의적 추론" },
-                { text: "내가 대화 흐름을 망쳤나보다... 이제 친구들이 나와는 다시는 대화하고 싶어 하지 않을 거야.", type: "파국화" }
-            ]
-        }
-    ];
-
     let psychIndex = 0;
     let psychAnswers = [];
 
@@ -454,41 +296,66 @@
     function showPsychResult() {
         const tally = {};
 
-        psychAnswers.forEach((t) => {
-            tally[t] = (tally[t] || 0) + 1;
+        psychAnswers.forEach((type) => {
+            tally[type] = (tally[type] || 0) + 1;
         });
 
-        let bestType = psychAnswers[0];
-        let bestCount = 0;
+        // 인지 오류끼리 동점일 때의 우선순위
+        const priority = [
+            "선택적 추상화",
+            "과잉 일반화",
+            "개인화",
+            "흑백논리",
+            "임의적 추론",
+            "파국화"
+        ];
 
-        Object.keys(tally).forEach((t) => {
-            if (tally[t] > bestCount) {
-                bestCount = tally[t];
-                bestType = t;
+        // 가장 높은 점수 찾기
+        let bestCount = Math.max(...Object.values(tally));
+
+        // 가장 높은 점수를 가진 유형들
+        const tiedTypes = Object.keys(tally).filter((type) => {
+            return tally[type] === bestCount;
+        });
+
+        let bestType;
+
+        // 하나만 최고점이면 그대로 선택
+        if (tiedTypes.length === 1) {
+            bestType = tiedTypes[0];
+        }
+
+        // 여러 개가 동점이면 우선순위 적용
+        else {
+            bestType = priority.find((type) => tiedTypes.includes(type));
+
+            // 우선순위 목록에 없는 유형(건강한 사고)만 동점인 경우
+            if (!bestType) {
+                bestType = "건강한 사고";
             }
-        });
+        }
 
         const result =
             RESULT_TYPES[bestType] ||
             RESULT_TYPES["건강한 사고"];
 
-
+        // 결과 유형
         psychResultTitleEl.textContent = result.title;
 
+        // 결과 이미지
         psychResultImageEl.src = result.image;
         psychResultImageEl.alt = result.title;
         psychResultImageEl.style.display = "block";
 
+        // 결과 설명
         psychCognitiveErrorEl.textContent = result.cognitiveError;
-
         psychWertherEl.textContent = result.werther;
-
         psychTipEl.textContent = result.tip;
 
         sendResultToSheet(bestType);
 
-        psychQuizEl.style.display = 'none';
-        psychResultEl.style.display = 'block';
+        psychQuizEl.style.display = "none";
+        psychResultEl.style.display = "block";
     }
 
     document.getElementById('startPsychBtn').addEventListener('click', startPsychTest);
