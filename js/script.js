@@ -300,7 +300,6 @@
             tally[type] = (tally[type] || 0) + 1;
         });
 
-        // 인지 오류끼리 동점일 때의 우선순위
         const priority = [
             "선택적 추상화",
             "과잉 일반화",
@@ -310,26 +309,21 @@
             "파국화"
         ];
 
-        // 가장 높은 점수 찾기
         let bestCount = Math.max(...Object.values(tally));
 
-        // 가장 높은 점수를 가진 유형들
         const tiedTypes = Object.keys(tally).filter((type) => {
             return tally[type] === bestCount;
         });
 
         let bestType;
 
-        // 하나만 최고점이면 그대로 선택
         if (tiedTypes.length === 1) {
             bestType = tiedTypes[0];
         }
 
-        // 여러 개가 동점이면 우선순위 적용
         else {
             bestType = priority.find((type) => tiedTypes.includes(type));
 
-            // 우선순위 목록에 없는 유형(건강한 사고)만 동점인 경우
             if (!bestType) {
                 bestType = "건강한 사고";
             }
@@ -339,15 +333,12 @@
             RESULT_TYPES[bestType] ||
             RESULT_TYPES["건강한 사고"];
 
-        // 결과 유형
         psychResultTitleEl.textContent = result.title;
 
-        // 결과 이미지
         psychResultImageEl.src = result.image;
         psychResultImageEl.alt = result.title;
         psychResultImageEl.style.display = "block";
 
-        // 결과 설명
         psychCognitiveErrorEl.textContent = result.cognitiveError;
         psychWertherEl.textContent = result.werther;
         psychTipEl.textContent = result.tip;

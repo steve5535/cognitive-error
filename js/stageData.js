@@ -2,7 +2,7 @@
 const STAGES = [
     {
         eyebrow: "STAGE 1",
-        title: "기억과 지각의 방",
+        title: "인지적 오류의 방",
         sub: "여섯 개의 문 뒤에는 각기 다른 인지 오류 사례가 숨어 있습니다. 문을 열어 오류의 이름을 추리하세요.",
         caseNo: "07",
         doors: [
