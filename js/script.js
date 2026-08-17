@@ -106,7 +106,7 @@
 
         modalCaseLabel.textContent = door.tag;
         modalLamp.className = 'mini-lamp' + (status[i] === 'correct' ? ' correct' : status[i] === 'wrong' ? ' wrong' : '');
-        modalBiasPlaceholder.textContent = status[i] === 'correct' ? door.bias : '이 문 뒤에는 어떤 인지 오류가 숨어 있을까요?';
+        modalBiasPlaceholder.textContent = status[i] === 'correct' ? door.bias : '이 문 뒤에는 어떤 인지적 오류가 숨어 있을까요?';
         modalScenario.textContent = door.scenario;
 
         renderOptions(i);
