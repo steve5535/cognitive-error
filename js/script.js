@@ -293,6 +293,61 @@
         }
     }
 
+    function renderCharacters(characters) {
+
+        const container = document.getElementById('psychCharacters');
+
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        characters.forEach((character) => {
+
+            const card = document.createElement('div');
+            card.className = 'character-card';
+
+            card.innerHTML = `
+            <img
+                src="${character.image}"
+                alt="${character.name}"
+                class="character-card-image"
+            >
+
+            <div class="character-card-name">
+                ${character.name}
+            </div>
+
+            <div class="character-card-source">
+                ${character.source}
+            </div>
+        `;
+
+            card.addEventListener('click', () => {
+                openCharacterModal(character);
+            });
+
+            container.appendChild(card);
+        });
+    }
+
+    function openCharacterModal(character) {
+
+        const modal = document.getElementById('characterModal');
+        const image = document.getElementById('characterModalImage');
+        const name = document.getElementById('characterModalName');
+        const source = document.getElementById('characterModalSource');
+        const description = document.getElementById('characterModalDescription');
+
+        image.src = character.image;
+        image.alt = character.name;
+
+        name.textContent = character.name;
+        source.textContent = character.source;
+        description.textContent = character.description;
+
+        modal.classList.add('show');
+    }
+
     function showPsychResult() {
         const tally = {};
 
@@ -343,11 +398,35 @@
         psychWertherEl.textContent = result.werther;
         psychTipEl.textContent = result.tip;
 
+        const characterSection = document.querySelector('.character-section');
+
+        if (bestType === "건강한 사고") {
+            characterSection.style.display = 'none';
+        } else {
+            characterSection.style.display = 'block';
+            renderCharacters(result.characters);
+        }
+
         sendResultToSheet(bestType);
 
         psychQuizEl.style.display = "none";
         psychResultEl.style.display = "block";
     }
+
+    document.getElementById('characterModalClose')
+        .addEventListener('click', () => {
+            document.getElementById('characterModal')
+                .classList.remove('show');
+        });
+
+    document.getElementById('characterModal')
+        .addEventListener('click', (e) => {
+
+            if (e.target.id === 'characterModal') {
+                e.currentTarget.classList.remove('show');
+            }
+
+        });
 
     document.getElementById('startPsychBtn').addEventListener('click', startPsychTest);
     document.getElementById('retakePsychBtn').addEventListener('click', startPsychTest);
