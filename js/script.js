@@ -156,7 +156,7 @@
             modalLamp.className = 'mini-lamp correct';
             modalBiasPlaceholder.textContent = door.bias;
             modalFeedback.className = 'feedback ok show';
-            modalFeedback.textContent = `정답입니다. ${door.explanation}`;
+            modalFeedback.textContent = `정답입니다.`;
         } else {
             chosenBtn.classList.add('wrong-pick');
             status[doorIdx] = 'wrong';
